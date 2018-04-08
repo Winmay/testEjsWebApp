@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>     
-      <% include nav %>
-  </body>
+  	<head>
+	    <title><%= title %></title>
+	    <link rel='stylesheet' href='/stylesheets/style.css' />
+  	</head>
+  	<body>     
+      	<% include nav %>
+
+      	<% if(locals.islogin){ %>
+      		<p>用户已登录</p>
+      	<% } else { %>
+      		<form method="post">
+      			<input type="submit" value="登录" />
+      		</form>
+      	<% } %>
+
+  	</body>
 </html>

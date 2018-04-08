@@ -3,6 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+//Express处理这个post请求是通过中间件bodyParser
+//没有这个中间件Express就不知道怎么处理这个请求，
+//通过bodyParser中间件分析 application/x-www-form-urlencoded
+//和application/json请求，并把变量存入req.body，这种我们才能够获取到！
+var bodyParser = require('body-parser');
+
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var subform = require('./routes/subform');
@@ -15,6 +22,15 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+//Express处理这个post请求是通过中间件bodyParser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+
+//这里传入了一个密钥加session id
+app.use(cookieParser('Wilson'));
+//使用靠就这个中间件
+app.use(session({ secret: 'wilson'}));
 
 app.use(logger('dev'));
 app.use(express.json());

@@ -5,4 +5,10 @@ body {
 
 a {
   color: #00B7FF;
+  padding: 20px 15px;
+}
+
+input {
+	display: block;
+	margin: 30px;
 }
